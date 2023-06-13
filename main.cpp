@@ -36,7 +36,7 @@ string subStringer(const string &str, char delim, int pos)
         start = end + 1;
         end = str.find(delim, start);
     }
-    // tokens.push_back(str.substr(start));
+    tokens.push_back(str.substr(start));
 
     if (pos >= 0 && pos < tokens.size())
     {
