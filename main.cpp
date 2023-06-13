@@ -5,33 +5,33 @@
 #include <string>
 using namespace std;
 // to upper case function to convert the string to upper case
-std::string toUpperCase(const std::string &str)
+string toUpperCase(const string &str)
 {
-    std::string result = str;
+    string result = str;
     for (char &c : result)
     {
-        c = std::toupper(c);
+        c = toupper(c);
     }
     return result;
 }
 // to lower case  function to convert the string to lower case
-std::string toLowerCase(const std::string &str)
+string toLowerCase(const string &str)
 {
-    std::string result = str;
+    string result = str;
     for (char &c : result)
     {
-        c = std::tolower(c);
+        c = tolower(c);
     }
     return result;
 }
 // substring function to get the substring from a string with a given delimiter and position of the substring;
-std::string subStringer(const std::string &str, char delim, int pos)
+string subStringer(const string &str, char delim, int pos)
 {
     int start = 0;
     int end = str.find(delim);
     int count = 0;
-    std::vector<std::string> tokens;
-    while (end != std::string::npos)
+    vector<string> tokens;
+    while (end != string::npos)
     {
         tokens.push_back(str.substr(start, end - start));
         start = end + 1;
@@ -94,10 +94,9 @@ int main()
         else if (command.substr(0, 3) == "add")
         {
             string location = toUpperCase(command.substr(4, command.length() - 4));
-            cout << "Adding location " << location << endl;
 
             // Append location to file
-            ofstream Location("locations.txt", std::ios::app);
+            ofstream Location("locations.txt", ios::app);
             if (Location.is_open())
             {
                 Location << location << endl;
@@ -124,7 +123,7 @@ int main()
         else if (command.substr(0, 6) == "record")
         {
             string disease = command.substr(7, command.length() - 7);
-            ofstream Disease("diseases.txt", std::ios::app);
+            ofstream Disease("diseases.txt", ios::app);
             if (Disease.is_open())
             {
                 Disease << toLowerCase(disease) << endl;
@@ -241,9 +240,12 @@ int main()
             {
                 while (getline(myFile, line))
                 {
-                    string caseNumber = subStringer(line, ' ', 2);
-                    int num = std::stoi(caseNumber);
-                    totalCases = totalCases + num;
+                    if (subStringer(line, ' ', 1) == diseaseToLowerCase)
+                    {
+                        string caseNumber = subStringer(line, ' ', 2);
+                        int num = stoi(caseNumber);
+                        totalCases = totalCases + num;
+                    }
                 }
                 cout << "Total cases of '" << toUpperCase(disease) << "' = " << totalCases << endl;
             }
