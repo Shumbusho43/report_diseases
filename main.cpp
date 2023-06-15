@@ -105,20 +105,9 @@ int main()
                 }
                 else
                 {
-                    string line;
-                    while (getline(inFile, line))
-                    {
-                        if (line == location)
-                        {
-                            cout << "Location already exists" << endl;
-                        }
-                        else
-                        {
-                            Location << location << endl;
-                            Location.close();
-                            cout << "Location " << location << " is successfully added!" << endl;
-                        }
-                    }
+                    Location << location << endl;
+                    Location.close();
+                    cout << "Location " << location << " is successfully added!" << endl;
                 }
             }
             else
