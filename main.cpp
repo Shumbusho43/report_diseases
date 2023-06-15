@@ -37,7 +37,6 @@ string subStringer(const string &str, char delim, int pos)
         end = str.find(delim, start);
     }
     tokens.push_back(str.substr(start));
-
     if (pos >= 0 && pos < tokens.size())
     {
         return tokens[pos];
@@ -93,14 +92,34 @@ int main()
         else if (command.substr(0, 3) == "add")
         {
             string location = toUpperCase(command.substr(4, command.length() - 4));
-
             // Append location to file
             ofstream Location("locations.txt", ios::app);
             if (Location.is_open())
             {
-                Location << location << endl;
-                Location.close();
-                cout << "Location " << location << " is successfully added!" << endl;
+                // checking if location exists
+                ifstream inFile("locations.txt");
+                if (!inFile)
+                {
+                    cout << "Cannot open the file" << endl;
+                    return -1; // Return an appropriate value indicating an error
+                }
+                else
+                {
+                    string line;
+                    while (getline(inFile, line))
+                    {
+                        if (line == location)
+                        {
+                            cout << "Location already exists" << endl;
+                        }
+                        else
+                        {
+                            Location << location << endl;
+                            Location.close();
+                            cout << "Location " << location << " is successfully added!" << endl;
+                        }
+                    }
+                }
             }
             else
             {
